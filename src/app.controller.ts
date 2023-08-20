@@ -9,7 +9,7 @@ import { FindOneParams } from './dtos/params.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get("/health")
+  @Get()
   @HttpCode(200)
   checkHealth(){
     return "I'm okay!"
