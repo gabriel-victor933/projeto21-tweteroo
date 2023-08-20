@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './entities/user.entity';
 import { CreateUserDTO } from './dtos/users.dto';
 import { CreateTweetDTO } from './dtos/tweet.dto';
+import { FindOneParams } from './dtos/params.dto';
 
 @Controller()
 export class AppController {
@@ -20,9 +21,9 @@ export class AppController {
   }
 
   @Get("tweets")
-  getTweets(@Query("page") page: number){
-    console.log(page);
-    return "ok"
+  getTweets(@Query() params: FindOneParams){
+    if(params.page < 1) throw new HttpException('Forbidden', HttpStatus.BAD_REQUEST);
+    return this.appService.getTweets(params.page ? params.page : 1);
   }
 
   @Get("tweets/:username")

@@ -35,4 +35,10 @@ export class AppService {
     console.log(this.tweets)
     return "ok"
   }
+
+  getTweets(page: number){
+    console.log(page)
+    const sendTweets = this.tweets
+    return sendTweets.reverse().slice(15*(page -1),15*page);
+  }
 }
