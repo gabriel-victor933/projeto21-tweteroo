@@ -5,7 +5,7 @@ export class CreateTweetDTO {
     @IsString()
     @IsNotEmpty({message: "All fields are required!"})
     username: string;
-    @IsUrl()
+    @IsString()
     @IsNotEmpty({message: "All fields are required!"})
     tweet: string;
 }

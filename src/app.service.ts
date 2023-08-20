@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { Tweet } from './entities/tweet.entity';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
@@ -20,5 +21,18 @@ export class AppService {
   postUser(username: string, avatar: string){
     const user = new User(username,avatar)
     this.users.push(user);
+    console.log(this.users)
+  }
+
+  createTweet(username: string, tweet: string){
+    const user = this.users.find((user) => user.username == username)
+    if(!user){
+      throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    }
+
+    const newTweet = new Tweet(user,tweet)
+    this.tweets.push(newTweet)
+    console.log(this.tweets)
+    return "ok"
   }
 }

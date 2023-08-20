@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './entities/user.entity';
 import { CreateUserDTO } from './dtos/users.dto';
@@ -8,19 +8,15 @@ import { CreateTweetDTO } from './dtos/tweet.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Post("sign-in")
+  @HttpCode(200)
   postUser(@Body() body: CreateUserDTO){
-    return "ok"
+    return this.appService.postUser(body.username,body.avatar);
   }
 
   @Post("tweets")
   postTweet(@Body() body: CreateTweetDTO){
-    return "post tweets"
+    return this.appService.createTweet(body.username,body.tweet)
   }
 
   @Get("tweets")
