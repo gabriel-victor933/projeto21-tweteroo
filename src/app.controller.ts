@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './entities/user.entity';
+import { CreateUserDTO } from './dtos/users.dto';
+import { CreateTweetDTO } from './dtos/tweet.dto';
 
 @Controller()
 export class AppController {
@@ -12,13 +14,12 @@ export class AppController {
   }
 
   @Post("sign-in")
-  postUser(@Body("username") username: string, @Body("avatar") avatar:string){
-    console.log(username,avatar)
+  postUser(@Body() body: CreateUserDTO){
     return "ok"
   }
 
   @Post("tweets")
-  postTweet(){
+  postTweet(@Body() body: CreateTweetDTO){
     return "post tweets"
   }
 
