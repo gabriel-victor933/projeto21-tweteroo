@@ -9,7 +9,13 @@ import { FindOneParams } from './dtos/params.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post("sign-in")
+  @Get("/health")
+  @HttpCode(200)
+  checkHealth(){
+    return "I'm okay!"
+  }
+
+  @Post("sign-up")
   @HttpCode(200)
   postUser(@Body() body: CreateUserDTO){
     return this.appService.postUser(body.username,body.avatar);
@@ -28,7 +34,7 @@ export class AppController {
 
   @Get("tweets/:username")
   getTweet(@Param("username") username: string){
-    console.log(username);
-    return "ok"
+    
+    return this.appService.getTweetsByUsername(username)
   }
 }

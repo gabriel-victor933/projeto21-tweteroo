@@ -10,6 +10,7 @@ export class Tweet {
     }
 
     get tweet(){
-        return {...this._user, tweet: this._tweet}
+        return {...this._user.user, tweet: this._tweet}
     }
+
 }

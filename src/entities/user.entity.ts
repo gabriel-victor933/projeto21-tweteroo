@@ -1,14 +1,18 @@
 export class User {
     private _username: string;
-    private email: string;
+    private avatar: string;
 
-    constructor(username: string, email: string){
+    constructor(username: string, avatar: string){
         this._username = username
-        this.email = email
+        this.avatar = avatar
     }
 
     get username(){
         return this._username
+    }
+
+    get user(){
+        return {username: this._username, avatar: this.avatar}
     }
 }
 
