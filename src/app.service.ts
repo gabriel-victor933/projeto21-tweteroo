@@ -16,4 +16,9 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  postUser(username: string, avatar: string){
+    const user = new User(username,avatar)
+    this.users.push(user);
+  }
 }
